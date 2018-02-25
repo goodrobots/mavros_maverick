@@ -1,0 +1,5 @@
+<library path="lib/libmavros_maverick">
+    <class name="param_value" type="mavros::maverick_plugins::ParamValuePlugin" base_class_type="mavros::plugin::PluginBase">
+		<description>Publish Param msg to monitor parameters changes.</description>
+	</class>
+</library>
