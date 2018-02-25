@@ -1,17 +1,5 @@
-plugin_blacklist:
-# common
-- actuator_control
-- ftp
-- safety_area
-- hil
-# extras
-- altitude
-- debug_value
-- image_pub
-- mocap_pose_estimate
-- px4flow
-- vibration
-- 'vision_*'
+plugin_blacklist: []
 
-plugin_whitelist: []
-#- 'sys_*'
+plugin_whitelist:
+- sys_status
+- param_value
