@@ -15,6 +15,8 @@
 
 namespace mavros {
 namespace maverick_plugins {
+using utils::enum_value;
+
 /**
  * @brief  Param value monitor plugin.
  *
@@ -23,7 +25,9 @@ namespace maverick_plugins {
  */
 class ParamValuePlugin : public plugin::PluginBase {
 public:
-	ParamValuePlugin() : PluginBase(),
+	using MT = mavlink::common::MAV_PARAM_TYPE;
+    
+    ParamValuePlugin() : PluginBase(),
 		param_value_nh("~")
 	{ }
 
@@ -53,14 +57,27 @@ private:
         mavros_maverick::Param param_msg;
         
         param_msg.param_id =  mavlink::to_string(pmsg.param_id);
-        param_msg.param_value = pmsg.param_value;
         param_msg.param_type = pmsg.param_type;
         param_msg.param_count = pmsg.param_count;
         param_msg.param_index = pmsg.param_index;
+
+        int32_t int_tmp;
+		double float_tmp;
+
+		if (pmsg.param_type == enum_value(MT::REAL32)) {
+                float_tmp = static_cast<double>(pmsg.param_value);
+                float_tmp = floor(pow(10,7)*float_tmp)/pow(10,7);
+                param_msg.param_value = float_tmp;
+        }else{
+                int_tmp = static_cast<int32_t>(pmsg.param_value);
+                param_msg.param_value = int_tmp;
+        }
         
         param_value_pub.publish(param_msg);
 	}
 
+		
+	
 };
 }	// namespace extra_plugins
 }	// namespace mavros
