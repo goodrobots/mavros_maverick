@@ -64,13 +64,15 @@ private:
         int32_t int_tmp;
 		double float_tmp;
 
-		if (pmsg.param_type == enum_value(MT::REAL32)) {
+		if (pmsg.param_type == enum_value(MT::REAL32) || pmsg.param_type == enum_value(MT::REAL64)) {
                 float_tmp = static_cast<double>(pmsg.param_value);
                 float_tmp = floor(pow(10,7)*float_tmp)/pow(10,7);
-                param_msg.param_value = float_tmp;
+                param_msg.param_value.real = float_tmp;
+                param_msg.param_value.integer = 0;
         }else{
                 int_tmp = static_cast<int32_t>(pmsg.param_value);
-                param_msg.param_value = int_tmp;
+                param_msg.param_value.integer = int_tmp;
+                param_msg.param_value.real = 0.0f;
         }
         
         param_value_pub.publish(param_msg);

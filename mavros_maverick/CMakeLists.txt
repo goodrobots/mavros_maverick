@@ -104,6 +104,7 @@ add_library(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME}
   ${mavros_LIBRARIES}
+  ${mavros_msgs_LIBRARIES}
   ${catkin_LIBRARIES}
 )
 
