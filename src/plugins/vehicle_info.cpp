@@ -46,7 +46,8 @@ public:
 	Subscriptions get_subscriptions()
 	{
 		return {
-			       
+			       make_handler(&VehicleInfoPlugin::handle_heartbeat),
+                   make_handler(&VehicleInfoPlugin::handle_autopilot_version)
 		};
 	}
 
