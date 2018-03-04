@@ -2,4 +2,7 @@
     <class name="param_value" type="mavros::maverick_plugins::ParamValuePlugin" base_class_type="mavros::plugin::PluginBase">
 		<description>Publish Param msg to monitor parameters changes.</description>
 	</class>
+    <class name="vehicle_info" type="mavros::maverick_plugins::VehicleInfoPlugin" base_class_type="mavros::plugin::PluginBase">
+		<description>This plugin allows requesting standard vehicle information.</description>
+	</class>
 </library>

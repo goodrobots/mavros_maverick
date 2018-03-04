@@ -41,10 +41,11 @@ add_message_files(
     Param.msg
 )
 
-#add_service_files(
-#  DIRECTORY srv
-#  FILES
-#)
+add_service_files(
+  DIRECTORY srv
+  FILES
+  VehicleInfo.srv
+)
 
 ## Generate added messages and services with any dependencies listed here
 generate_messages(
@@ -100,6 +101,7 @@ include_directories(
 
 add_library(${PROJECT_NAME}
   src/plugins/param_value.cpp
+  src/plugins/vehicle_info.cpp
 )
 
 target_link_libraries(${PROJECT_NAME}
