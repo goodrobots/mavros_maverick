@@ -80,7 +80,7 @@ private:
         ROS_INFO_STREAM_NAMED("DEBUG", "DEBUG_V_INFO::handle_heartbeat: " << hb.to_yaml());
 
 		if (m_uas->is_my_target(msg->sysid)) {
-			ROS_WARN("VEH_INFO : NOT MY TARGET");
+			ROS_WARN("VEH_INFO : NOT MY TARGET SYSID %u , COMPID %u", msg->sysid,msg->compid);
             return;
 		}
 		      
