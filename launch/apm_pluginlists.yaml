@@ -1,5 +1,6 @@
 plugin_blacklist: []
 
 plugin_whitelist:
-- sys_status
+- 'sys_*'
 - param_value
+- vehicle_info

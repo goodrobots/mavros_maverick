@@ -2,10 +2,10 @@
 	<!-- vim: set ft=xml noet : -->
 	<!-- example launch script for ArduPilotMega based FCU's -->
 
-	<arg name="fcu_url" default="udp://127.0.0.1:14551@14555/?ids=1,0" />
+	<arg name="fcu_url" default="udp://127.0.0.1:14550@14555/?ids=2,0" />
 	<arg name="gcs_url" default="" />
 	<arg name="tgt_system" default="1" />
-	<arg name="tgt_component" default="1" />
+	<arg name="tgt_component" default="0" />
 	<arg name="log_output" default="screen" />
 
 	<include file="$(find mavros)/launch/node.launch">
