@@ -124,7 +124,8 @@ private:
         res.product_id = product_id;
         res.uid = uid;
 
-        res.success = true;    
+        res.success = true;   
+        return res.success; 
     }
 
 	/* -*- Utilities -*- */
