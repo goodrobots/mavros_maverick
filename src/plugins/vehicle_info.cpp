@@ -77,13 +77,17 @@ private:
 	void handle_heartbeat(const mavlink::mavlink_message_t *msg, mavlink::common::msg::HEARTBEAT &hb)
 	{
 		using mavlink::common::MAV_MODE_FLAG;
-        ROS_INFO_STREAM_NAMED("DEBUG", "DEBUG_V_INFO::handle_heartbeat: " << hb.to_yaml());
+        //ROS_INFO_STREAM_NAMED("DEBUG", "DEBUG_V_INFO::handle_heartbeat: " << hb.to_yaml());
 
 		if (m_uas->is_my_target(msg->sysid)) {
-			ROS_WARN("VEH_INFO : NOT MY TARGET SYSID %u , COMPID %u", msg->sysid,msg->compid);
-            return;
+			//ROS_WARN("VEH_INFO : NOT MY TARGET SYSID %u , COMPID %u", msg->sysid,msg->compid);
+           // return;
 		}
-		      
+		auto ap = m_uas->get_autopilot();
+        if(!((MAV_AUTOPILOT::ARDUPILOTMEGA == ap)|| (MAV_AUTOPILOT::PX4 == ap))) {
+            ROS_WARN("HB - Type : not APM or PX4 return");
+            return;
+        }
         type = hb.type; 
 		autopilot = hb.autopilot;
         sysid = msg->sysid;
@@ -102,10 +106,14 @@ private:
 
 	void handle_autopilot_version(const mavlink::mavlink_message_t *msg, mavlink::common::msg::AUTOPILOT_VERSION &apv)
 	{
-        if (m_uas->is_my_target(msg->sysid)) {
-			return;
-		}
-           
+       // if (m_uas->is_my_target(msg->sysid)) {
+		//	return;
+		//}
+        auto ap = m_uas->get_autopilot();
+        if(!((MAV_AUTOPILOT::ARDUPILOTMEGA == ap)|| (MAV_AUTOPILOT::PX4 == ap))) {
+            ROS_WARN("APV - Type : not APM or PX4 return");
+            return;
+        }  
         process_autopilot_version_normal(apv, msg->sysid, msg->compid);
 	}
 
